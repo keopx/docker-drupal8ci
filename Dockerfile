@@ -37,6 +37,6 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
 #RUN pecl install imagick
 
 # Remove index.html
-RUN rm -fr /var/www/html/index.html
+RUN rm -fr /var/www/html
 
 WORKDIR /var/www/html

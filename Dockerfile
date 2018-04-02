@@ -5,7 +5,7 @@ RUN apt-get update && apt-get install -y \
   libmagickwand-dev \
   mariadb-client \
   sqlite \
-  php-pdo-sqlite \
+  php7.1-sqlite3 \
   sudo
 
 # Remove the vanilla Drupal project that comes with this image.

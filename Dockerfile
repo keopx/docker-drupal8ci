@@ -10,8 +10,8 @@ RUN apt-get update && apt-get install -y \
 RUN rm -rf ..?* .[!.]* *
 
 # Change docroot since we use Composer Drupal project.
-RUN sed -ri -e 's!/var/www/html!/var/www/html/web!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www!/var/www/html/web!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+RUN sed -ri -e 's!/var/www/html!/var/www/keopx/web!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www!/var/www/keopx/web!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 # Install composer.
 # RUN wget https://raw.githubusercontent.com/composer/getcomposer.org/f3333f3bc20ab8334f7f3dada808b8dfbfc46088/web/installer -O - -q | php -- --quiet
@@ -36,7 +36,4 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
 # Install ImageMagic to take screenshots.
 #RUN pecl install imagick
 
-# Remove index.html
-RUN rm -fr /var/www/html
-
-WORKDIR /var/www/html
+WORKDIR /var/www/keopx

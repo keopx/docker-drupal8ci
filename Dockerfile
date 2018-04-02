@@ -36,4 +36,7 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
 # Install ImageMagic to take screenshots.
 #RUN pecl install imagick
 
+# Remove index.html
+RUN rm -fr /var/www/html/index.html
+
 WORKDIR /var/www/html

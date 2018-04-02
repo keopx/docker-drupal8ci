@@ -3,7 +3,9 @@ FROM keopx/apache-php:7.1
 RUN apt-get update && apt-get install -y \
   imagemagick \
   libmagickwand-dev \
-  mariadb-client \  
+  mariadb-client \
+  sqlite \
+  php-pdo-sqlite \
   sudo
 
 # Remove the vanilla Drupal project that comes with this image.

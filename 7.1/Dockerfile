@@ -1,5 +1,9 @@
 FROM keopx/apache-php:7.1
 
+MAINTAINER keopx <keopx@keopx.net>
+
+# Based on https://github.com/Lullabot/drupal8ci.
+
 RUN apt-get update && apt-get install -y \
   imagemagick \
   libmagickwand-dev \
@@ -12,15 +16,8 @@ RUN apt-get update && apt-get install -y \
 RUN rm -rf ..?* .[!.]* *
 
 # Change docroot since we use Composer Drupal project.
-RUN sed -ri -e 's!/var/www/html!/var/www/keopx/web!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www!/var/www/keopx/web!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
-
-# Install composer.
-# RUN wget https://raw.githubusercontent.com/composer/getcomposer.org/f3333f3bc20ab8334f7f3dada808b8dfbfc46088/web/installer -O - -q | php -- --quiet
-# RUN mv composer.phar /usr/local/bin/composer
-
-# Put a turbo on composer.
-#RUN composer global require hirak/prestissimo
+RUN sed -ri -e 's!/var/www/html!/var/www/html/web!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www!/var/www/html/web!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 # Install XDebug.
 RUN phpenmod xdebug

@@ -12,12 +12,9 @@ RUN apt-get update && apt-get install -y \
   php7.1-sqlite3 \
   sudo
 
-# Remove the vanilla Drupal project that comes with the parent image.
-RUN rm -rf /var/www/html
-
 # Change docroot since we use Composer Drupal project.
-RUN sed -ri -e 's!/var/www/html!/var/www/html/web!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www!/var/www/html/web!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+RUN sed -ri -e 's!/var/www/html!/var/www/repo/web!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www!/var/www/repo/web!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 # Install XDebug.
 RUN phpenmod xdebug
@@ -35,4 +32,4 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
 # Install ImageMagic to take screenshots.
 #RUN pecl install imagick
 
-WORKDIR /var/www/html
+WORKDIR /var/www/repo

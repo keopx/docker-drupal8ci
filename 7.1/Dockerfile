@@ -7,9 +7,6 @@ MAINTAINER keopx <keopx@keopx.net>
 # Working dir
 WORKDIR /var/www/html
 
-# Volume for Apache2 data
-VOLUME /var/www/html
-
 RUN apt-get update && apt-get install -y \
   imagemagick \
   libmagickwand-dev \
@@ -19,9 +16,7 @@ RUN apt-get update && apt-get install -y \
   sudo
 
 # Remove the vanilla Drupal project that comes with this image.
-RUN mkdir /var/www/html && chown -R www-data:www-data /var/www/html
-RUN cd /var/www/html && rm -rf ..?* .[!.]* *
-
+RUN rm -rf ..?* .[!.]* *
 
 # Change docroot since we use Composer Drupal project.
 RUN sed -ri -e 's!/var/www/html!/var/www/html/web!g' /etc/apache2/sites-available/*.conf
@@ -42,5 +37,3 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
 
 # Install ImageMagic to take screenshots.
 #RUN pecl install imagick
-
-WORKDIR /var/www/html

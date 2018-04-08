@@ -4,6 +4,12 @@ MAINTAINER keopx <keopx@keopx.net>
 
 # Based on https://github.com/Lullabot/drupal8ci.
 
+# Working dir
+WORKDIR /var/www/html
+
+# Volume for Apache2 data
+VOLUME /var/www/html
+
 RUN apt-get update && apt-get install -y \
   imagemagick \
   libmagickwand-dev \
@@ -13,8 +19,8 @@ RUN apt-get update && apt-get install -y \
   sudo
 
 # Change docroot since we use Composer Drupal project.
-RUN sed -ri -e 's!/var/www/html!/var/www/repo/web!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www!/var/www/repo/web!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+RUN sed -ri -e 's!/var/www/html!/var/www/html/web!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www!/var/www/html/web!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 # Install XDebug.
 RUN phpenmod xdebug
@@ -32,4 +38,4 @@ RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSI
 # Install ImageMagic to take screenshots.
 #RUN pecl install imagick
 
-WORKDIR /var/www/repo
+WORKDIR /var/www/html

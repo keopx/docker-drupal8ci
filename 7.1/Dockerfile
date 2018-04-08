@@ -19,7 +19,9 @@ RUN apt-get update && apt-get install -y \
   sudo
 
 # Remove the vanilla Drupal project that comes with this image.
-RUN rm -rf ..?* .[!.]* *
+RUN chown -R www-data:www-data /var/www/html
+RUN cd /var/www/html && rm -rf ..?* .[!.]* *
+
 
 # Change docroot since we use Composer Drupal project.
 RUN sed -ri -e 's!/var/www/html!/var/www/html/web!g' /etc/apache2/sites-available/*.conf

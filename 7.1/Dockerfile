@@ -18,6 +18,9 @@ RUN apt-get update && apt-get install -y \
   php7.1-sqlite3 \
   sudo
 
+# Remove the vanilla Drupal project that comes with this image.
+RUN rm -rf ..?* .[!.]* *
+
 # Change docroot since we use Composer Drupal project.
 RUN sed -ri -e 's!/var/www/html!/var/www/html/web!g' /etc/apache2/sites-available/*.conf
 RUN sed -ri -e 's!/var/www!/var/www/html/web!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
